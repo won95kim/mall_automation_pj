@@ -7,7 +7,7 @@ from selenium.webdriver.chrome.service import Service
 def driver():
     chrome_option = Options()
 
-    chrome_option.add_argument("--headless")                # Jenkins용
+    #chrome_option.add_argument("--headless")                # Jenkins용
     chrome_option.add_argument("--disable-extensions")      # 크롬 확장 프로그램 비활성화
     chrome_option.add_argument("--disable-popup-blocking")  # 팝업 차단 해제
     chrome_option.add_argument("--disable-gpu")             # GPU사용 X, CPU만 사용 가벼운 테스트 진행
@@ -18,7 +18,6 @@ def driver():
     chrome_option.page_load_strategy = "eager"              # 기본값은 normal → eager: HTML 요소만 로딩되면 바로 테스트
 
     driver = webdriver.Chrome(service=Service(), options=chrome_option)
-    driver.implicitly_wait(5)   # 암시적 대기, 요소가 나타날 때까지 최대 5초까지 대기
 
     yield driver
 

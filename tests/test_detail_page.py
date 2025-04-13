@@ -259,7 +259,7 @@ class TestDetailPage:
 
 
     ''' 상품 탭 클릭 테스트 '''
-    @pytest.mark.parametrize("option_index", [0, 1, 2, 3])
+    @pytest.mark.parametrize("option_index", [0, 1, 2, 3, 4])
     @allure.title("상품 탭 클릭 테스트")
     @allure.description("상품상세 페이지에서 각 탭을 클릭하고 활성화되는지 확인")
     def test_goods_tab_click(self, driver: WebDriver, request, option_index):

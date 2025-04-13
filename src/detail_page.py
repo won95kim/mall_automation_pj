@@ -50,7 +50,7 @@ class DetailPage:
     ''' 상품 탭 클릭 '''
     def goods_tab_click(self, goods_tab_name):
         goods_tab = self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, f"a[href='#{goods_tab_name}']")))
-        goods_tab.click()
+        self.driver.execute_script("arguments[0].click();", goods_tab)
         return goods_tab
 
 
