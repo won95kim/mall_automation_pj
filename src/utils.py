@@ -1,4 +1,4 @@
-import os, logging, time
+import os, logging, time, allure
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.common.exceptions import NoAlertPresentException
 
@@ -27,6 +27,13 @@ def utils_reports_set(page_name, func_name):
     screenshot = os.path.join(SCREENSHOT_DIR, f"{timestamp}_{func_name}.png")
 
     return logger, screenshot
+
+
+''' Allure 스크린샷 첨부 '''
+def utils_attach_screenshot(driver, screenshot_path):
+    driver.save_screenshot(screenshot_path)
+    with open(screenshot_path, "rb") as image_file:
+        allure.attach(image_file.read(), name=os.path.basename(screenshot_path), attachment_type=allure.attachment_type.PNG)
 
 
 ''' 알럿 처리 '''
