@@ -7,7 +7,7 @@ from selenium.webdriver.chrome.service import Service
 def driver():
     chrome_option = Options()
 
-    #chrome_option.add_argument("--headless")                # Jenkins용
+    chrome_option.add_argument("--headless")                # Jenkins용
     chrome_option.add_argument("--disable-extensions")      # 크롬 확장 프로그램 비활성화
     chrome_option.add_argument("--disable-popup-blocking")  # 팝업 차단 해제
     chrome_option.add_argument("--disable-gpu")             # GPU사용 X, CPU만 사용 가벼운 테스트 진행
