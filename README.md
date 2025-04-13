@@ -16,17 +16,25 @@ Python과 Selenium을 기반으로, 실제 쇼핑몰 사이트의 핵심 사용�
 ---
   
 ## 🗂️ 파일 구조
-
-src/  
-├── detail_page.py  
-└── recent_page.py  
-└── utils.py  
   
-tests/  
-├── init.py  
-├── conftest.py  
-├── test_detail_page.py  
-└── test_recent_page.py  
+.
+├── .env                 # 환경 변수 파일  
+├── .gitignore           # Git 무시 파일  
+├── .gitattributes       # Git 속성 파일  
+├── .pytest.ini          # Pytest 설정 파일  
+├── README.md            # 현재 파일  
+├── reports/             # 테스트 보고서 및 로그(gitignore 포함)  
+│   ├── logs/            # 로그 파일  
+│   └── screenshots/     # 스크린샷 파일  
+├── src/                 # 소스 코드  
+│   ├── detail_page.py   # 상품 상세 페이지 소스 코드  
+│   ├── recent_page.py   # 최근 본 상품 페이지 소스 코드  
+│   └── utils.py         # 유틸리티 함수  
+├── tests/               # 테스트 코드  
+│   ├── __init__.py      # 테스트 초기화 파일  
+│   ├── conftest.py      # Pytest 설정 파일  
+│   ├── test_detail_page.py # 상품 상세 페이지 테스트 코드  
+│   └── test_recent_page.py # 최근 본 상품 페이지 테스트 코드  
   
 ---
   
@@ -49,4 +57,4 @@ tests/
 ## 📌 기타
 
 테스트 자동화 전반에 대한 이해와 실습을 목적으로 진행된 프로젝트로,  
-Selenium의 DOM 탐색, WebDriverWait, 예외 처리 및 테스트 구조화(Pytest)를 연습하는 데 중점을 두었습니다.
+Selenium의 DOM 탐색, WebDriverWait, 예외 처리 및 테스트 구조화(Pytest)를 연습하는데 중점을 두었습니다.

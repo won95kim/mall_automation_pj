@@ -61,7 +61,7 @@ class DetailPage:
         fixed_buy_btn.click()
 
 
-    ''' 확인용 상품 정보 저장 '''
+    ''' 상품 정보 저장 '''
     def save_goods_info(self):
         goods_title = self.wait.until(EC.presence_of_element_located((By.CLASS_NAME, "tit-prd"))).text
         goods_option = self.wait.until(EC.presence_of_element_located((By.XPATH, "//li[@id='basic_0']/span"))).text

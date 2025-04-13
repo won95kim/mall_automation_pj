@@ -1,15 +1,19 @@
 import pytest
+import os
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait as ws
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
+from dotenv import load_dotenv
 
 from src.utils import utils_reports_set, utils_alert
 from src.detail_page import DetailPage
 
+load_dotenv()   # env 파일 로드
+
 # 테스트 데이터 상수 정의
-URL = "https://www.nibbuns.co.kr/shop/shopdetail.html?branduid=70015"
+GOODS_URL = os.getenv("GOODS_URL")
 BRAND_ID = "70015"
 OPTIONS = ["아이보리"]
 GOODS_TAB_OPTIONS = ["detailGoodsInfo", "detailReview", "detailQna", "detailRelation", "detailChange"]
@@ -18,7 +22,7 @@ PAGE_NAME = "test_detail_page"
 @pytest.mark.usefixtures("driver")
 class TestDetailPage:
 
-    ''' [단위] 상품 옵션 클릭 테스트 '''
+    ''' 상품 옵션 클릭 테스트 '''
     @pytest.mark.parametrize("option_index", [0])   # 상품의 옵션 수에 따라 변경
     def test_select_option(self, driver: WebDriver, request, option_index):
         FUNC_NAME = request.node.name   # 함수 이름 저장
@@ -27,13 +31,13 @@ class TestDetailPage:
         wait = ws(driver, 10)
 
         try:
-            # 상품 상세페이지 진입
-            driver.get(URL)
+            # 상품상세 페이지 진입
+            driver.get(GOODS_URL)
 
-            # 상품 상세페이지 진입 확인
+            # 상품상세 페이지 진입 확인
             wait.until(EC.url_contains(BRAND_ID))
             assert BRAND_ID in driver.current_url
-            logger.info("상품 상세페이지 진입 확인")
+            logger.info("상품상세 페이지 진입 확인")
 
             # 상품 옵션 클릭
             detail_page.select_option(OPTIONS[option_index])
@@ -61,7 +65,7 @@ class TestDetailPage:
             logger.info("=" * 50)
     
 
-    ''' [단위] 바로 구매 버튼 클릭 테스트 (비로그인 기준) '''
+    ''' 바로 구매 버튼 클릭 테스트 (비로그인 기준) '''
     def test_buy_btn_click(self, driver: WebDriver, request):
         FUNC_NAME = request.node.name   # 함수 이름 저장
         logger, screenshot = utils_reports_set(PAGE_NAME, FUNC_NAME) # 로그, 스크린샷 설정
@@ -69,13 +73,13 @@ class TestDetailPage:
         wait = ws(driver, 10)
 
         try:
-            # 상품 상세페이지 진입
-            driver.get(URL)
+            # 상품상세 페이지 진입
+            driver.get(GOODS_URL)
 
-            # 상품 상세페이지 진입 확인
+            # 상품상세 페이지 진입 확인
             wait.until(EC.url_contains(BRAND_ID))
             assert BRAND_ID in driver.current_url
-            logger.info("상품 상세페이지 진입 확인")
+            logger.info("상품상세 페이지 진입 확인")
 
             # 상품 옵션 클릭
             detail_page.select_option(OPTIONS[0])
@@ -113,7 +117,7 @@ class TestDetailPage:
             logger.info("=" * 50)
 
     
-    ''' [단위] 장바구니 버튼 클릭 테스트 '''
+    ''' 장바구니 버튼 클릭 테스트 '''
     def test_cart_btn_click(self, driver: WebDriver, request):
         FUNC_NAME = request.node.name   # 함수 이름 저장
         logger, screenshot = utils_reports_set(PAGE_NAME, FUNC_NAME) # 로그, 스크린샷 설정
@@ -121,13 +125,13 @@ class TestDetailPage:
         wait = ws(driver, 10)
 
         try:
-            # 상품 상세페이지 진입
-            driver.get(URL)
+            # 상품상세 페이지 진입
+            driver.get(GOODS_URL)
 
-            # 상품 상세페이지 진입 확인
+            # 상품상세 페이지 진입 확인
             wait.until(EC.url_contains(BRAND_ID))
             assert BRAND_ID in driver.current_url
-            logger.info("상품 상세페이지 진입 확인")
+            logger.info("상품상세 페이지 진입 확인")
 
             # 상품 옵션 클릭
             detail_page.select_option(OPTIONS[0])
@@ -175,7 +179,7 @@ class TestDetailPage:
             logger.info("=" * 50)
 
 
-    ''' [단위] 관심상품 버튼 클릭 테스트 (비로그인 기준) '''
+    ''' 관심상품 버튼 클릭 테스트 (비로그인 기준) '''
     def test_wish_btn_click(self, driver: WebDriver, request):
         FUNC_NAME = request.node.name   # 함수 이름 저장
         logger, screenshot = utils_reports_set(PAGE_NAME, FUNC_NAME) # 로그, 스크린샷 설정
@@ -183,13 +187,13 @@ class TestDetailPage:
         wait = ws(driver, 10)
 
         try:
-            # 상품 상세페이지 진입
-            driver.get(URL)
+            # 상품상세 페이지 진입
+            driver.get(GOODS_URL)
 
-            # 상품 상세페이지 진입 확인
+            # 상품상세 페이지 진입 확인
             wait.until(EC.url_contains(BRAND_ID))
             assert BRAND_ID in driver.current_url
-            logger.info("상품 상세페이지 진입 확인")
+            logger.info("상품상세 페이지 진입 확인")
 
             # 관심상품 버튼 클릭
             detail_page.wish_btn_click()
@@ -223,7 +227,7 @@ class TestDetailPage:
             logger.info("=" * 50)
 
 
-    ''' [단위] 상품 탭 클릭 테스트 '''
+    ''' 상품 탭 클릭 테스트 '''
     @pytest.mark.parametrize("option_index", [0, 1, 2, 3])
     def test_goods_tab_click(self, driver: WebDriver, request, option_index):
         FUNC_NAME = request.node.name   # 함수 이름 저장
@@ -232,13 +236,13 @@ class TestDetailPage:
         wait = ws(driver, 10)
 
         try:
-            # 상품 상세페이지 진입
-            driver.get(URL)
+            # 상품상세 페이지 진입
+            driver.get(GOODS_URL)
 
-            # 상품 상세페이지 진입 확인
+            # 상품상세 페이지 진입 확인
             wait.until(EC.url_contains(BRAND_ID))
             assert BRAND_ID in driver.current_url
-            logger.info("상품 상세페이지 진입 확인")
+            logger.info("상품상세 페이지 진입 확인")
 
             # 상품 탭 클릭
             goods_tab = detail_page.goods_tab_click(GOODS_TAB_OPTIONS[option_index])
@@ -266,7 +270,7 @@ class TestDetailPage:
             logger.info("=" * 50)
 
 
-    ''' [단위] 하단 스크롤 후 바로 구매 버튼 클릭 테스트 '''
+    ''' 하단 스크롤 후 바로 구매 버튼 클릭 테스트 '''
     def test_fixed_buy_btn_click(self, driver: WebDriver, request):
         FUNC_NAME = request.node.name   # 함수 이름 저장
         logger, screenshot = utils_reports_set(PAGE_NAME, FUNC_NAME) # 로그, 스크린샷 설정
@@ -274,13 +278,13 @@ class TestDetailPage:
         wait = ws(driver, 10)
 
         try:
-            # 상품 상세페이지 진입
-            driver.get(URL)
+            # 상품상세 페이지 진입
+            driver.get(GOODS_URL)
 
-            # 상품 상세페이지 진입 확인
+            # 상품상세 페이지 진입 확인
             wait.until(EC.url_contains(BRAND_ID))
             assert BRAND_ID in driver.current_url
-            logger.info("상품 상세페이지 진입 확인")
+            logger.info("상품상세 페이지 진입 확인")
 
             # 하단 스크롤 후 바로 구매 버튼 클릭
             detail_page.fixed_buy_btn_click()

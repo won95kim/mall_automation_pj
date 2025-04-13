@@ -24,7 +24,7 @@ def utils_reports_set(page_name, func_name):
 
     # 스크린샷 설정
     timestamp = time.strftime("%Y-%m-%d_%H-%M-%S")
-    screenshot = os.path.join(SCREENSHOT_DIR, f"{timestamp}_{func_name}.jpg")
+    screenshot = os.path.join(SCREENSHOT_DIR, f"{timestamp}_{func_name}.png")
 
     return logger, screenshot
 
