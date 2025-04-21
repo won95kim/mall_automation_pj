@@ -50,7 +50,8 @@ tests/               # 테스트 코드
 
 - Python 3.x  
 - Selenium WebDriver  
-- Pytest  
+- Pytest
+- Jenkins
   
 ---
   
